@@ -5,6 +5,7 @@ var following : bool = false
 
 @onready var icon : Sprite2D = $Sprite
 @onready var pointer : Sprite2D = $Pointer
+@onready var state : Label = $VBoxContainer/State
 
 func _ready() -> void:
 	show_state()
@@ -56,6 +57,16 @@ func change_mode()->void:
 	if Input.is_action_just_pressed("normal_mouse"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		pointer.hide()
+	
+	if Input.is_action_just_pressed("v-sync"):
+		var mode : int = ( DisplayServer.window_get_vsync_mode() + 1 ) % 4
+		DisplayServer.window_set_vsync_mode( mode )
+		
+	if Input.is_action_just_pressed("fullscreen"):
+		if DisplayServer.window_get_mode() == 0:
+			DisplayServer.window_set_mode( DisplayServer.WINDOW_MODE_FULLSCREEN )
+		else:
+			DisplayServer.window_set_mode( DisplayServer.WINDOW_MODE_WINDOWED )
 
 func get_mouse_pos()->Vector2:
 	if Input.mouse_mode == 0:
@@ -76,6 +87,15 @@ func show_state()->void:
 	elif Input.mouse_mode == 2:
 		txt += "Captured software mouse\n"
 	
+	if DisplayServer.window_get_vsync_mode() == 0:
+		txt += "V-sync disabled\n"
+	elif DisplayServer.window_get_vsync_mode() == 1:
+		txt += "v-sync enabled\n"
+	elif DisplayServer.window_get_vsync_mode() == 2:
+		txt += "v-sync adaptive\n"
+	elif DisplayServer.window_get_vsync_mode() == 3:
+		txt += "v-sync mailbox\n"
+	
 	txt += "Accumulate input: " + str( Input.use_accumulated_input )
 	
-	$State.text = txt
+	state.text = txt
