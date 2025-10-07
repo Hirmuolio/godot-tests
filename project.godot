@@ -15,6 +15,11 @@ run/main_scene="uid://bqk5376knforc"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/inferred_declaration=1
+
 [input]
 
 drag={

@@ -10,7 +10,7 @@ var following : bool = false
 func _ready() -> void:
 	show_state()
 
-func _unhandled_input(event)-> void:
+func _unhandled_input( event : InputEvent )-> void:
 	if event is InputEventMouseMotion:
 		mouse_input += event.relative
 
