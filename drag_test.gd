@@ -28,6 +28,9 @@ func _process ( _delta : float )-> void:
 	mouse_input = Vector2.ZERO
 
 func change_mode()->void:
+	if Input.is_action_just_pressed("exit"):
+		get_tree().quit()
+	
 	# Turn accumulated_input on/off
 	if Input.is_action_just_pressed("accumulator_toggle"):
 		Input.set_use_accumulated_input( !Input.use_accumulated_input )
