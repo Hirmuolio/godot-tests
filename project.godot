@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="drag_test"
+config/name="tests"
 run/main_scene="uid://bqk5376knforc"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
